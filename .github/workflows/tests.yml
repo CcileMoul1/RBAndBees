@@ -33,9 +33,9 @@ jobs:
 
       - name: Setup Application
         run: composer setup
-        
-      - name: Run Pest tests (verbose)        
-      	run: ./vendor/bin/pest -v
+      - name: Run Pest tests (verbose)
+        run: ./vendor/bin/pest -v
+
 
       - name: Run CI Checks
         run: composer ci:check
