@@ -39,3 +39,5 @@ jobs:
 
       - name: Run CI Checks
         run: composer ci:check
+        env:
+          PHPSTAN_TURBO: 0
