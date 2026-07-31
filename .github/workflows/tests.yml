@@ -11,7 +11,7 @@ permissions:
 
 jobs:
   ci:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
 
     steps:
       - name: Checkout code
@@ -33,6 +33,9 @@ jobs:
 
       - name: Setup Application
         run: composer setup
+        
+      - name: Run Pest tests (verbose)        
+      	run: ./vendor/bin/pest -v
 
       - name: Run CI Checks
         run: composer ci:check

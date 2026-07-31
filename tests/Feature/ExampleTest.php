@@ -3,8 +3,7 @@
 test('returns a successful response', function () {
     $response = $this->get('/');
     
-    dump('status', $response->status());    
-    dump('location', $response->headers->get('Location'));
+    echo "STATUS=" . $response->status() . PHP_EOL;
 
     $response->assertOk();
 });
