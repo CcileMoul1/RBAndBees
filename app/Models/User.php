@@ -53,4 +53,10 @@ class User extends Authenticatable
             ? Str::substr($initials, 0, 1).Str::substr($initials, -1)
             : $initials;
     }
+    
+    public function properties()
+    {
+    	return $this->hasMany(Property::class, "owner_id");
+    }
+    
 }

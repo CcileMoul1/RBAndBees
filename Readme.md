@@ -2,10 +2,10 @@
 
 - App presentation {app-presentation}
 	- Overview {overview}
-	- Detailed description, definition of the use cases {Detailed description}
+	- Detailed description, definition of the use cases {Detailed description}foreign 
 - How to {how-to}
 - ToDo list {ToDo-list}
-- History {history}
+- Choices {choices}
 
 ## [App presentation]
 
@@ -22,5 +22,28 @@ Fell free to comment on any aspect of this in order for me to strengthen my lear
 ## [How to]
 
 ## [ToDo list]
+	- [ ] create the tables/models of the database
+		- [ ] Property
+			- [x] Model 
+			- [x] Migration
+			- [ ] Controller
+			- [x] Factory
+			- [ ] Tests
+		- [ ] Booking
+		- [ ] PropertyVerification
 
-## [History]
+## [Choices]
+Property has the following attributs
+	- id
+	- name (string)
+	- description (longText)
+	- price (decimal, 10 digits including 2 after the decimal point) price per night
+	- capacity (integer) capacity in term of beddings
+	- owner_id foreign key, indicating who the property belongs to.
+	- validated (boolean) is the property submission validated or not. Repetitive with PropertyVerficiation, but it simplifies the request and as it's a boolean, it does not take a lot of memory.
+	Property could have other information, such as where it is but I decide to let it this way for now.
+	
+	Constraints : the price is positive but could be 0 (free) and the capacity is strictely positive.
+	Added on the DB because it's the baseground of the app.
+	
+
