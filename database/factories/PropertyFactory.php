@@ -11,7 +11,8 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class PropertyFactory extends Factory
 {
-	protected $model = Property::class;
+    protected $model = Property::class;
+
     /**
      * Define the model's default state.
      *
@@ -20,16 +21,17 @@ class PropertyFactory extends Factory
     public function definition(): array
     {
         return [
-        	'name'=> $this->faker->words(2, true),
-        	'description' => $this->faker->sentences(4, true),
-        	'price' => $this->faker->randomFloat(2,0,10000),
-        	'capacity' => $this->faker->numberBetween(0,100),
-        	'owner_id' => User::factory(),
-        	'validated' => false,
+            'name' => $this->faker->words(2, true),
+            'description' => $this->faker->sentences(4, true),
+            'price' => $this->faker->randomFloat(2, 0, 10000),
+            'capacity' => $this->faker->numberBetween(0, 100),
+            'owner_id' => User::factory(),
+            'validated' => false,
         ];
     }
-    
-    public function validated(): static{
-    	return $this->state(fn () => ['validated' => true]);
-	}
+
+    public function validated(): static
+    {
+        return $this->state(fn () => ['validated' => true]);
+    }
 }
