@@ -24,7 +24,7 @@ jobs:
         ports:
           - 3306:3306
         options: >-
-          --health-cmd="mysqladmin ping -h 127.0.0.1 -proot"
+          --health-cmd="mysqladmin ping -h 127.0.0.1 -p${MYSQL_ROOT_PASSWORD}"
           --health-interval=10s
           --health-timeout=5s
           --health-retries=5
@@ -47,6 +47,14 @@ jobs:
         with:
           node-version: '22'
 
+      - name: Wait for MySQL
+          run: |
+            for i in {1..30}; do
+              php -r "exit(@(new PDO('mysql:host=127.0.0.1;port=3306;dbname=RBAndBees_test;charset=utf8mb4','rb','${{ secrets.MYSQL_PASSWORD }}'))->query('SELECT 1')) ? 0 : 1;" && exit 0
+              sleep 2
+            done
+            echo "MySQL not ready" && exit 1
+
       - name: Setup Application
         env:
           DB_CONNECTION: mysql
@@ -55,6 +63,7 @@ jobs:
           DB_DATABASE: RBAndBees_test
           DB_USERNAME: rb
           DB_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
+          DB_URL: ""
         run: composer setup
       - name: Run Pest tests (verbose)
         run: ./vendor/bin/pest -v
