@@ -80,6 +80,11 @@ jobs:
           ./vendor/bin/pest -v
 
       - name: Run CI Checks
-        run: composer ci:check
-        env:
+        env: DB_CONNECTION: mysql
+          DB_HOST: 127.0.0.1
+          DB_PORT: 3306
+          DB_DATABASE: RBAndBees_test
+          DB_USERNAME: rb
+          DB_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
           PHPSTAN_TURBO: 0
+        run: composer ci:check
