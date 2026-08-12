@@ -24,7 +24,7 @@ jobs:
         ports:
           - 3306:3306
         options: >-
-          --health-cmd="mysqladmin ping -h 127.0.0.1 -p${MYSQL_ROOT_PASSWORD}"
+          --health-cmd="mysqladmin ping -h 127.0.0.1 -u root -p${{ secrets.MYSQL_ROOT_PASSWORD }}"
           --health-interval=10s
           --health-timeout=5s
           --health-retries=5
@@ -34,6 +34,15 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
+          
+      - name: Wait for MySQL
+        run: |
+          for i in {1..30}; do
+            mysqladmin ping -h 127.0.0.1 -u root -p"${{ secrets.MYSQL_ROOT_PASSWORD }}" && exit 0
+            sleep 2
+          done
+          echo "MySQL not ready"
+          exit 1
 
       - name: Setup PHP
         uses: shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240 # v2
@@ -41,16 +50,12 @@ jobs:
           php-version: '8.5'
           tools: composer:v2
           coverage: none
+          extensions: pdo_mysql
 
       - name: Setup Node
         uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
           node-version: '22'
-
-      - name: Start MySQL
-        run: |
-          sudo /etc/init.d/mysql start
-          mysql -e "CREATE DATABASE IF NOT EXISTS $DB_DATABASE;" -u$DB_USER -p$DB_PASSWORD
 
       - name: Setup Application
         env:
@@ -60,7 +65,6 @@ jobs:
           DB_DATABASE: RBAndBees_test
           DB_USERNAME: rb
           DB_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
-          DB_URL: ""
         run: composer setup
       - name: Run Pest tests (verbose)
         run: ./vendor/bin/pest -v
