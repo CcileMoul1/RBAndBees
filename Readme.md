@@ -1,11 +1,11 @@
 # RBAndBees
 
-- App presentation {app-presentation}
-	- Overview {overview}
-	- Detailed description, definition of the use cases {Detailed description}foreign 
-- How to {how-to}
-- ToDo list {ToDo-list}
-- Choices {choices}
+- App presentation (#app-presentation)
+	- Overview (#overview)
+	- Detailed description, definition of the use cases (#Detailed description) 
+- How to (#how-to)
+- ToDo list (#ToDo-list)
+- Choices (#choices)
 
 ## [App presentation]
 
@@ -18,6 +18,12 @@ This app is a technical test for an intership. As it's my first Laravel project 
 Fell free to comment on any aspect of this in order for me to strengthen my learning.
 
 ### [Detailed description]
+List of use cases of the website.
+
+1. A not-logged user can 
+	- see the properties in a carroussel format
+	- click on one property to see its summary (no information about availability)
+	- sign-up or sign-in
 
 ## [How to]
 
