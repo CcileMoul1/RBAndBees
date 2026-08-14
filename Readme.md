@@ -1,11 +1,11 @@
 # RBAndBees
 
-- App presentation (#app-presentation)
-	- Overview (#overview)
-	- Detailed description, definition of the use cases (#Detailed description) 
-- How to (#how-to)
-- ToDo list (#ToDo-list)
-- Choices (#choices)
+- [App presentation](#app-presentation)
+	- [Overview](#overview)
+	- [Detailed description, definition of the use cases](#Detailed description) 
+- [How to](#how-to)
+- [ToDo list](#ToDo-list)
+- [Choices](#choices)
 
 ## [App presentation]
 
